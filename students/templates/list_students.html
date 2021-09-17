@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="" method="get" class="input-group mt-5 mb-3 px-5">
+  <button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Section</button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="{% url 'list_students' %}">All Sections</a></li>
+    <li><a class="dropdown-item" href="{% url 'list_students' section='A' %}">Science</a></li>
+    <li><a class="dropdown-item" href="{% url 'list_students' section='C' %}">Commerce</a></li>
+    <li><a class="dropdown-item" href="{% url 'list_students' section='H' %}">Humanity</a></li>
+  </ul>
+  
+  <input type="text" name="name" class="form-control" placeholder='Enter name of student' aria-label="Enter name">
+  <button type="submit" class="btn btn-primary btn-lg">Search</button>
+</form>
+
+<div class="contain_table px-5">
+<table class="table table-hover text-center" >
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Roll No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Class</th>
+      <th scope="col">Section</th>
+      
+      <th scope="col">Mark Attendance</th>
+     
+      
+    </tr>
+  </thead>
+  <tbody> 
+    {% for stu in Students %}
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">QR Code</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div><center>
+          <div class="modal-body">
+            
+            <iframe width="100vw" height="100vh" src="{% url 'generate' id=stu.id %}"></iframe> 
+            
+    
+          </div>
+        </center>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    
+      <tr>
+        
+        <td>{{stu.rollno}}</td>
+        <td>{{stu.name}}</td>
+        <td>{{stu.standard}}</td>
+        <td>{{stu.section}}</td>
+        
+        <td>
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upc-scan" viewBox="0 0 16 16">
+            <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+          </svg> View QR
+        </button>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'mark_attendance' id=stu.id %}" type="button" class="btn btn-outline-success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+          </svg>
+        </a>
+        {% endif %}
+      </td>
+        
+      </tr>
+      {% endfor %}
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

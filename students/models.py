@@ -1,12 +1,21 @@
 from django.db import models
+from django.shortcuts import HttpResponse
 from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import ForeignKey
 from django.db.models.query_utils import select_related_descend
 import datetime
+from django.utils import timezone
+
+from django.http.response import HttpResponse
 class studentsList(models.Model):
+    section_names=[
+        ('A','science'),
+        ('C','commerce'),
+        ('H','humanity')]
+
     name=models.CharField(null=False,max_length=20)
     standard=models.IntegerField()
-    section=models.CharField(max_length=10)
+    section=models.CharField(max_length=6,choices=section_names)
     rollno=models.IntegerField(default=0)
 
     def __str__(self):
@@ -21,28 +30,36 @@ class attendMonth(models.Model):
 
 class attendon(models.Model):
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
-    #month=models.ForeignKey(attendMonth,on_delete=models.CASCADE)
-    date=models.DateField()
+    #month=models.
+    date=models.DateField(default=timezone.now,primary_key=True)
     attended=models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.student)
+    # def delete(self,*args,**kwargs):
+    #     mydate = datetime.datetime.now()
+    #     name_month=mydate.strftime("%B")
+    #     month=attendMonth.objects.get(student=self.student,name=name_month)
+    #     month.days=month.days-1
+    #     month.save()
+    #     super().delete(*args,**kwargs)
+
 
     def save(self,*args,**kwargs):
-        
-        mydate = datetime.datetime.now()
-        name_month=mydate.strftime("%B")
-        try:
-            month=attendMonth.objects.get(student=self.student)
-            month.name=name_month
-            if self.attended:
-                month.days=month.days+1
-        except:
-            month=attendMonth.objects.create(student=self.student,name=name_month)
-        
-
-       
-
-        month.save()
-
-        return super().save(*args,**kwargs)
+            # try:
+            #     attendon.objects.get(student=self.student,date=datetime.date.today())
+            #     return HttpResponse('Sorry this operation is not valid')        
+                
+            # except:
+            mydate = datetime.datetime.now()
+            name_month=mydate.strftime("%B")
+            try:
+                month=attendMonth.objects.get(student=self.student)
+                month.name=name_month
+                if self.attended:
+                    month.days=month.days+1
+            except:
+                month=attendMonth.objects.create(student=self.student,name=name_month)
+            month.save()
+                
+            return super().save(*args,**kwargs)
