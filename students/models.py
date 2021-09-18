@@ -31,7 +31,7 @@ class attendMonth(models.Model):
 class attendon(models.Model):
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
     #month=models.
-    date=models.DateField(default=timezone.now,primary_key=True)
+    date=models.DateField(default=timezone.now)
     attended=models.BooleanField(default=False)
 
     def __str__(self):
