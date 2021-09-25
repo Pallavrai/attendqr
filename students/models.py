@@ -29,10 +29,12 @@ class attendMonth(models.Model):
         return f'{self.name} - {str(self.student)}'
 
 class attendon(models.Model):
+    # udate=models.CharField(max_length=30,default=datetime.date.today())
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
     #month=models.
-    date=models.DateField(default=timezone.now)
+    date=models.DateField(default=timezone.now,primary_key=True)
     attended=models.BooleanField(default=False)
+
 
     def __str__(self):
         return str(self.student)
@@ -45,21 +47,21 @@ class attendon(models.Model):
     #     super().delete(*args,**kwargs)
 
 
-    def save(self,*args,**kwargs):
-            # try:
-            #     attendon.objects.get(student=self.student,date=datetime.date.today())
-            #     return HttpResponse('Sorry this operation is not valid')        
+    # def save(self,*args,**kwargs):
+    #         # try:
+    #         #     attendon.objects.get(student=self.student,date=datetime.date.today())
+    #         #     return HttpResponse('Sorry this operation is not valid')        
                 
-            # except:
-            mydate = datetime.datetime.now()
-            name_month=mydate.strftime("%B")
-            try:
-                month=attendMonth.objects.get(student=self.student)
-                month.name=name_month
-                if self.attended:
-                    month.days=month.days+1
-            except:
-                month=attendMonth.objects.create(student=self.student,name=name_month)
-            month.save()
+    #         # except:
+    #         mydate = datetime.datetime.now()
+    #         name_month=mydate.strftime("%B")
+    #         try:
+    #             month=attendMonth.objects.get(student=self.student)
+    #             month.name=name_month
+    #             if self.attended:
+    #                 month.days=month.days+1
+    #         except:
+    #             month=attendMonth.objects.create(student=self.student,name=name_month)
+    #         month.save()
                 
-            return super().save(*args,**kwargs)
+    #         return super().save(*args,**kwargs)
