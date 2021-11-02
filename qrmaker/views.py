@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect,reverse
 from django.contrib.auth.decorators import login_required
 from students.models import attendon,studentsList
 from datetime import date
@@ -11,7 +11,6 @@ from django.utils import timezone
 def generate(request,id):
     curl=request.META['HTTP_HOST']
     img = qrcode.make(curl+'/mark/'+str(id))
-    type(img)
     #img.save("some_file.png")
     
     response = HttpResponse(content_type="image/jpeg")
@@ -35,4 +34,4 @@ def markattendance(request,id):
     #     month=attendMonth.objects.create(student=stu,name=name_month)
     # month.save()
 
-    return HttpResponse('Submited')
+    return redirect(reverse('list_students'))

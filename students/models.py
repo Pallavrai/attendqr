@@ -50,6 +50,10 @@ class attendon(models.Model):
 
 
     def save(self,*args,**kwargs):
+            
+            # uid=str(f'{self.student_id}-{timezone.now().strftime("%y%m%d")}')
+            # s=attendon.objects.get(student=self.student,udate=uid)
+            # s.save()
             mydate = datetime.datetime.now()
             name_month=mydate.strftime("%B")
             try:
