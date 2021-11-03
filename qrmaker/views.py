@@ -8,6 +8,7 @@ import qrcode
 from django.urls import resolve
 from students.models import attendMonth,attendon
 from django.utils import timezone
+
 def generate(request,id):
     curl=request.META['HTTP_HOST']
     img = qrcode.make(curl+'/mark/'+str(id))
