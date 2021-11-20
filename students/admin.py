@@ -14,6 +14,8 @@ class AttendmonthAdmin(admin.ModelAdmin):
     search_fields = ['student']
     list_filter = ('name','days')
 
+admin.site.site_title='Attendqr'
+admin.site.site_header="Attendqr"
 admin.site.register(studentsList,StudentAdmin)
 admin.site.register(attendMonth,AttendmonthAdmin)
 admin.site.register(attendon,AttendonAdmin)
