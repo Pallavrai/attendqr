@@ -15,7 +15,8 @@ class AttendmonthAdmin(admin.ModelAdmin):
     list_filter = ('name','days')
 
 admin.site.site_title='Attendqr'
-admin.site.site_header="Attendqr"
+admin.site.index_title='Dashboard'
+admin.site.site_header="Attendqr Admin"
 admin.site.register(studentsList,StudentAdmin)
 admin.site.register(attendMonth,AttendmonthAdmin)
 admin.site.register(attendon,AttendonAdmin)
