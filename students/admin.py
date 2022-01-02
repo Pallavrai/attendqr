@@ -8,10 +8,10 @@ class StudentAdmin(admin.ModelAdmin):
 
 class AttendonAdmin(admin.ModelAdmin):
     list_filter = ('attended','date')
-    search_fields=['student']
+    search_fields=['student__name']
 
 class json_dataAdmin(admin.ModelAdmin):
-    search_fields = ['student']
+    search_fields = ['student__name']
 
 admin.site.site_title='Attendqr'
 admin.site.index_title='Dashboard'

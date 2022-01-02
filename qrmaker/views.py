@@ -8,6 +8,7 @@ import qrcode
 from django.urls import resolve
 from students.models import attendon
 from django.utils import timezone
+from students.decorators import addmonth
 
 def generate(request,id):
     curl=request.META['HTTP_HOST']
@@ -19,6 +20,7 @@ def generate(request,id):
     return response
 
 @login_required
+@addmonth
 def markattendance(request,id):
     stu=studentsList.objects.get(id=id)
     uid=str(f'{id}-{timezone.now().strftime("%y%m%d")}')

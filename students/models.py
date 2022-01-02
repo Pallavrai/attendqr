@@ -21,6 +21,11 @@ class studentsList(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self,*args,**kwargs):
+        super(studentsList, self).save(*args, **kwargs)
+        student=json_data.objects.create(student=self)
+        student.save()
+
 
 class attendon(models.Model):
     udate=models.TextField(primary_key=True)
@@ -34,18 +39,20 @@ class attendon(models.Model):
 
 class json_data(models.Model):
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
-    data=models.TextField(default={'January':[31,0],
-                                    'February':[28,0],
-                                    'March':[31,0],
-                                    'April':[30,0],
-                                    'May' :[31,0],
-                                    'June' :[30,0],
-                                    'July':[31,0],
-                                    'August':[31,0],
-                                    'September':[30,0],
-                                    'October':[31,0],
-                                    'November':[30,0],
-                                    'December':[31,0]})
+    data=models.TextField(default={
+                                    "January":[31,0],
+                                    "February":[28,0,29],
+                                    "March":[31,0],
+                                    "April":[30,0],
+                                    "May" :[31,0],
+                                    "June" :[30,0],
+                                    "July":[31,0],
+                                    "August":[31,0],
+                                    "September":[30,0],
+                                    "October":[31,0],
+                                    "November":[30,0],
+                                    "December":[31,0]
+                                    })
    
 
     def __str__(self):
