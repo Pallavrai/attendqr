@@ -62,7 +62,7 @@
       <tr>
         
         <td>{{stu.rollno}}</td>
-        <td>{{stu.name}}</td>
+        <td><a href="{% url 'report' student=stu.id %}" style="text-decoration:none">{{stu.name}}</a></td>
         <td>{{stu.standard}}</td>
         <td>{{stu.section}}</td>
         

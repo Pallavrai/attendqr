@@ -27,7 +27,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="{% static 'carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'carousel.css' %}?{% now 'U' %}" rel="stylesheet">
      <title>AttendQR - 
      {% if request.name %}
      {{request.name}}

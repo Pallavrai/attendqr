@@ -18,3 +18,6 @@ def list_students(request,section='A'):
 
     return render(request,'list_students.html',context)
 
+def student_report(request,student):
+    return render(request,'student_report.html')
+
