@@ -41,7 +41,7 @@ class json_data(models.Model):
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
     data=models.TextField(default={
                                     "January":[31,0],
-                                    "February":[28,0,29],
+                                    "February":[28,0],
                                     "March":[31,0],
                                     "April":[30,0],
                                     "May" :[31,0],
