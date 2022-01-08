@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from students.models import studentsList,attendon,json_data
 from django.utils import timezone
+import datetime as dt
 
 def home(request):
     return render(request,'home.html')
@@ -21,7 +22,13 @@ def list_students(request,section='A'):
 def student_report(request,student):
     student=studentsList.objects.get(id=student)
     try:
-        obj_attendon=attendon.objects.get(student=student,date=timezone.now())
+        atndon=attendon.objects.get(student=student)
+        t=dt.date.today()
+        if atndon.date == t:
+            obj_attendon="Present"
+        else:
+            
+            obj_attendon="Absent"
     except attendon.DoesNotExist:
         obj_attendon=None
     context={
