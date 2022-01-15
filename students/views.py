@@ -12,7 +12,8 @@ def list_students(request,section='A'):
     if request.GET.get('name'):
         nm=request.GET.get('name')
     stu=studentsList.objects.exclude(pk__in=usrs).filter(section__exact=section,name__icontains=nm).order_by('name')
-    
+    if request.user.is_authenticated is not True:
+        stu=studentsList.objects.filter(section__exact=section,name__icontains=nm).order_by('name')
     context={
         'Students':stu
     }
@@ -22,15 +23,12 @@ def list_students(request,section='A'):
 def student_report(request,student):
     student=studentsList.objects.get(id=student)
     try:
-        atndon=attendon.objects.get(student=student)
         t=dt.date.today()
-        if atndon.date == t:
-            obj_attendon="Present"
-        else:
-            
-            obj_attendon="Absent"
+        atndon=attendon.objects.get(student=student,date=t)
+        obj_attendon="Present"
+        
     except attendon.DoesNotExist:
-        obj_attendon=None
+        obj_attendon="Absent"
     context={
         'attendon':obj_attendon,
         'student':student,
