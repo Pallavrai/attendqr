@@ -29,10 +29,11 @@ def student_report(request,student):
         
     except attendon.DoesNotExist:
         obj_attendon="Absent"
+    jd=json_data.objects.get(student=student)
     context={
         'attendon':obj_attendon,
         'student':student,
-        'jsondata':json_data
+        'jsondata':jd
     }
     return render(request,'student_report.html',context)
 

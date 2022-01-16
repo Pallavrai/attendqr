@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 from django.shortcuts import HttpResponse
 from django.db.models.deletion import CASCADE
@@ -14,7 +15,10 @@ class studentsList(models.Model):
         ('H','humanity')]
 
     name=models.CharField(null=False,max_length=20)
+    email=models.EmailField(null=True)
+    parent_name=models.CharField(max_length=20)
     standard=models.IntegerField()
+    phone=models.BigIntegerField(null=True)
     section=models.CharField(max_length=6,choices=section_names)
     rollno=models.IntegerField(default=0)
 
