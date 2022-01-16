@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 from django.shortcuts import HttpResponse
 from django.db.models.deletion import CASCADE
@@ -5,8 +6,8 @@ from django.db.models.fields.related import ForeignKey
 from django.db.models.query_utils import select_related_descend
 import datetime
 from django.utils import timezone
-
 from django.http.response import HttpResponse
+
 class studentsList(models.Model):
     section_names=[
         ('A','science'),
@@ -14,24 +15,25 @@ class studentsList(models.Model):
         ('H','humanity')]
 
     name=models.CharField(null=False,max_length=20)
+    email=models.EmailField(null=True)
+    parent_name=models.CharField(max_length=20)
     standard=models.IntegerField()
+    phone=models.BigIntegerField(null=True)
     section=models.CharField(max_length=6,choices=section_names)
     rollno=models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
-class attendMonth(models.Model):
-    student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
-    name=models.CharField(max_length=30)
-    days=models.IntegerField(default=1)
 
-    def __str__(self):
-        return f'{self.name} - {str(self.student)}'
+    def save(self,*args,**kwargs):
+        super(studentsList, self).save(*args, **kwargs)
+        student=json_data.objects.create(student=self)
+        student.save()
+
 
 class attendon(models.Model):
     udate=models.TextField(primary_key=True)
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
-    #month=models.
     date=models.DateField(default=timezone.now)
     attended=models.BooleanField(default=False)
 
@@ -39,30 +41,23 @@ class attendon(models.Model):
     def __str__(self):
         return str(self.student)    
 
-    
-    # def delete(self,*args,**kwargs):
-    #     mydate = datetime.datetime.now()
-    #     name_month=mydate.strftime("%B")
-    #     month=attendMonth.objects.get(student=self.student,name=name_month)
-    #     month.days=month.days-1
-    #     month.save()
-    #     super().delete(*args,**kwargs)
+class json_data(models.Model):
+    student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
+    data=models.TextField(default={
+                                    "January":[31,0],
+                                    "February":[28,0],
+                                    "March":[31,0],
+                                    "April":[30,0],
+                                    "May" :[31,0],
+                                    "June" :[30,0],
+                                    "July":[31,0],
+                                    "August":[31,0],
+                                    "September":[30,0],
+                                    "October":[31,0],
+                                    "November":[30,0],
+                                    "December":[31,0]
+                                    })
+   
 
-
-    def save(self,*args,**kwargs):
-            
-            # uid=str(f'{self.student_id}-{timezone.now().strftime("%y%m%d")}')
-            # s=attendon.objects.get(student=self.student,udate=uid)
-            # s.save()
-            mydate = datetime.datetime.now()
-            name_month=mydate.strftime("%B")
-            try:
-                month=attendMonth.objects.get(student=self.student)
-                month.name=name_month
-                if self.attended:
-                    month.days=month.days+1
-            except:
-                month=attendMonth.objects.create(student=self.student,name=name_month)
-            month.save()
-                
-            super().save(*args,**kwargs)
+    def __str__(self):
+        return str(self.student)

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="{% static 'rep-style.css' %}?{% now 'U' %}" rel="stylesheet">    
+
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col shadow p-3 mb-5 rounded order-1">
+            <center>
+                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg>
+            </center>
+            <h1 class="text-center"> {{student.name}}</h1>
+           
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Fields</th>
+                    <th scope="col">Values</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                   
+                    <td scope="row">Father's Name</td>
+                    <td>{{student.parent_name}}</td>
+                   
+                  </tr>
+                  <tr>
+                   
+                    <td scope="row">Email</td>
+                    <td>{{student.email}}</td>
+                   
+                  </tr>
+                  <tr>
+                  
+                    <td scope="row">Phone Number</td>
+                    <td>{{student.phone}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        
+        </div>
+        <div class="col-md-9 order-2 pt-2">
+
+          <p class="text-md-end text-center fs-2 fw-bold">Status: 
+            {% if attendon == "Present" %}        
+            <font color="green">{{attendon}}</font>
+            {% else %}
+            <font color="red">{{attendon}}</font>
+            {% endif %}
+          
+          </p>
+
+            <!-- <div class="card">
+                <div class="card-header">
+                  Featured
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div> -->
+
+
+              <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
+                        <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
+                      </svg>&nbsp; Attendance Graph
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div class="container-chart my-5"><canvas id="myChart" width="300" height="300"></canvas></div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+            
+
+            </div>
+        
+      
+        
+      <script>
+      
+      
+      
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var data={{jsondata.data|safe}}
+      var vals=[]
+      for(ele of Object.values(data)) {
+        vals.push(ele[1]/ele[0]*100)
+      }
+      console.log(vals)
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: Object.keys(data),
+              datasets: [{
+                  label: 'percent of Attendance',
+                  data: vals,
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+      </script>
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
