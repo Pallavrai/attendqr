@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from django.shortcuts import render,HttpResponse,redirect,reverse
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from students.models import attendon,studentsList
 from datetime import date
 import datetime
@@ -22,8 +23,11 @@ def generate(request,id):
 @login_required
 @addmonth
 def markattendance(request,id):
-    stu=studentsList.objects.get(id=id)
-    uid=str(f'{id}-{timezone.now().strftime("%y%m%d")}')
-    atten=attendon.objects.create(udate=uid,student=stu,attended=True)
-    atten.save()
-    return redirect(reverse('list_students'))
+    try:
+        stu=studentsList.objects.get(id=id)
+        uid=str(f'{id}-{timezone.now().strftime("%y%m%d")}')
+        atten=attendon.objects.create(udate=uid,student=stu,attended=True)
+        atten.save()
+    except:
+        return JsonResponse({'success':'False'})
+    return JsonResponse({'success':'True'})
