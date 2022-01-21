@@ -17,3 +17,36 @@
     background-color: rgb(0, 0, 0);
     position: relative;
 }
+
+
+#slider1
+{
+    background-image: url('https://www.sesd.org/cms/lib/CA01902799/Centricity/Domain/38/attendance%20matters%202.png');
+    background-color: #292828;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: content-box;
+    
+}
+
+#slider2
+{
+    background-image: url('https://marvel-b1-cdn.bc0a.com/f00000000170110/cloudinary.hbs.edu/hbsit/image/upload/s--7DnFbzE5--/f_auto,c_fill,h_1296,w_2800,/v20200101/EBF5409442C532368404454CDE9D6704.jpg');
+    background-color: #292828;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: content-box;
+    
+}
+#slider3
+{
+    background-image: url('https://www.appswave.io/wp-content/uploads/2020/04/Image-2.png');
+    background-color: #292828;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: content-box;
+    
+}
