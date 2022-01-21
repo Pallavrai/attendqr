@@ -2,8 +2,6 @@
 <script>
 $(document).ready(function(){
   $("a[href='{{request.path}}']").addClass('active');
-  console.log(url)
-
 
 });
 
@@ -26,6 +24,11 @@ $(document).ready(function(){
           <li class="nav-item">
             <a class="nav-link" href="/list_students">List Students</a>
           </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/sms">Send SMS</a>
+          </li>
+          {% endif %}
         </ul>
         <form action="list_students" class="d-flex">
           <input class="form-control me-2" name="name" type="search" placeholder="Search" aria-label="Search">

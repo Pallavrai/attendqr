@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
-<form action="" method="get" class="input-group mt-5 mb-3 px-5">
-  <button class="btn btn-outline-info dropdown-toggle d-none d-md-block" type="button" data-bs-toggle="dropdown" aria-expanded="false">Section</button>
+<form action="" method="get" class="input-group mt-5 mb-3 px-3">
+  <button class="btn btn-outline-info dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">Section</button>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'list_students' %}">All Sections</a></li>
     <li><a class="dropdown-item" href="{% url 'list_students' section='A' %}">Science</a></li>
@@ -12,11 +12,13 @@
   </ul>
   
   <input type="text" name="name" class="form-control" placeholder='Enter name of student' aria-label="Enter name">
-  <button type="submit" class="btn btn-primary btn-lg">Search</button>
+  <button type="submit" class="btn btn-primary btn-lg"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+  </svg></button>
 </form>
 
 
-<div class="table-responsive px-5">
+<div class="table-responsive px-3">
 <table class="table table-hover text-center" >
   <thead class="table-dark">
     <tr>
@@ -79,13 +81,20 @@
       <div class="col">
         {% if request.user.is_authenticated %}
         
-          <a href="{% url 'mark_attendance' id=stu.id %}" type="button" class="btn btn-outline-success">
+          <a type="button" id='markatnd' onclick="mark('{{stu.id}}')" class="btn btn-outline-success" >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
             <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
           </svg>
         </a>
+
+        
+
+
+
       </div>
       </div>
+
+     
       {% endif %}
 
 
@@ -96,14 +105,17 @@
       {% endfor %}
 </tbody>
 </table>
+
 </div>
+<center><div id='spin' class="spinner-grow spinner-grow-sm text-success" style="width: 5rem; height: 5rem;" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></center>
 
 
 
 
 
 
-
-
+<script src="{% static 'listingpage.js' %}?{% now 'U' %}"></script>
 
 {% endblock %}
