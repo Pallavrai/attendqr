@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('students.urls')),
     path('', include('qrmaker.urls')),
-    path('', include('sms.urls'))
+    path('', include('sms.urls')),
+    path('', include('scanner.urls'))
 ]

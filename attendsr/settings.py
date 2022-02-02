@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'students',
     'qrmaker',
     'sms',
+    'scanner',
 ]
 
 MIDDLEWARE = [
