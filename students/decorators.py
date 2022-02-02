@@ -28,7 +28,7 @@ def addmonth(function):
 def admin_or_refer(function):
     def wrap(request,id):
         stu=studentsList.objects.get(id=id)
-        if request.is_authenticate() is not True:
+        if request.user.is_authenticated() is not True:
             return reverse('report', kwargs={'student':stu})
 
         return function(request,id)
