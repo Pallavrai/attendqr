@@ -17,4 +17,4 @@ def sms_home(request):
     return render(request,'sms.html',context)
 
 def send(request,lst_students):
-    return JsonResponse
+    pass
