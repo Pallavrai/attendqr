@@ -9,7 +9,7 @@ import qrcode
 from django.urls import resolve
 from students.models import attendon
 from django.utils import timezone
-from students.decorators import addmonth
+from students.decorators import addmonth, admin_or_refer
 
 def generate(request,id):
     curl=request.META['HTTP_HOST']
@@ -20,7 +20,7 @@ def generate(request,id):
     img.save(response, "JPEG")
     return response
 
-@login_required
+@admin_or_refer
 @addmonth
 def markattendance(request,id):
     try:

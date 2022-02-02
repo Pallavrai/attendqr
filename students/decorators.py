@@ -1,4 +1,5 @@
 from .models import json_data,studentsList
+from django.urls import reverse
 import datetime
 import json
 
@@ -23,3 +24,12 @@ def addmonth(function):
         return function(request,id)
     return wrap
 
+
+def admin_or_refer(function):
+    def wrap(request,id):
+        stu=studentsList.objects.get(id=id)
+        if request.is_authenticate() is not True:
+            return reverse('report', kwargs={'student':stu})
+
+        return function(request,id)
+    return wrap
