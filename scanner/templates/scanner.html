@@ -1,56 +1,64 @@
-
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
+<body>
+  <div class="container py-2">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="card">
+                  <h5 class="card-header h5 text-center">
+                      Scanner
+                  </h5>
+                  <div class="card-body">
+                      <div class="booth">
+                          <video id="video" width="100%" height="100%" autoplay>
+                          </video>
+                      </div>
 
-<style>
-  .scanner-container {
-  height: 100vh;
-  width: 100vw;
-  background: rgba(0, 0, 0, 0.507);
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.scanner-container .scanner {
-  width: 30vw;
-  height: 30vw;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(#fff, #fff) left top, linear-gradient(#fff, #fff) left top, linear-gradient(#fff, #fff) right top, linear-gradient(#fff, #fff) right top, linear-gradient(#fff, #fff) left bottom, linear-gradient(#fff, #fff) left bottom, linear-gradient(#fff, #fff) right bottom, linear-gradient(#fff, #fff) right bottom;
-  background-repeat: no-repeat;
-  background-size: 2px 24px, 24px 2px;
-}
-.scanner-container .scanner:before {
-  content: "";
-  position: absolute;
-  width: 120%;
-  background: #00a001;
-  top: 0;
-  left: -10%;
-  height: 5px;
-  border-radius: 100%;
-  box-shadow: 0 0 4px 0 green;
-  animation: scan ease-in-out 2s infinite;
-}
-@keyframes scan {
-  from {
-    top: 0;
-  }
-  to {
-    top: 95%;
-  }
-}
-
-</style>
-
-<div class="scanner-container">
-  <div class="scanner">
+                      <div class="text-right">
+                          <a href="#!" class="btn btn-danger" 
+                              onClick="stop()">
+                              Stop Cam
+                          </a>
+                          <a href="#!" class="btn btn-success"
+                              onClick="start()">
+                              Start Cam
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-</div>
 
+  <script>
+      var stop = function () {
+          var stream = video.srcObject;
+          var tracks = stream.getTracks();
+          for (var i = 0; i < tracks.length; i++) {
+              var track = tracks[i];
+              track.stop();
+          }
+          video.srcObject = null;
+      }
+      var start = function () {
+          var video = document.getElementById('video'),
+              vendorUrl = window.URL || window.webkitURL;
+          if (navigator.mediaDevices.getUserMedia) {
+              navigator.mediaDevices.getUserMedia({ video: true })
+                  .then(function (stream) {
+                      video.srcObject = stream;
+                  }).catch(function (error) {
+                      console.log("Something went wrong!");
+                  });
+          }
+      }
+      $(function () {
+          start();
+      });  
+  </script>
+</body>
 
 
 {% endblock %}
