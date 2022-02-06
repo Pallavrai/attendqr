@@ -45,11 +45,11 @@ function onScanSuccess(qrCodeMessage) {
                         url: 'https://'+qrCodeMessage, 
                         success: function(result){
                                         if(result['success']=='True'){
-                                        $('#indicate').fadeIn(2000)
+                                        $('#indicate').fadeIn(1000)
                                         }
                                         else{
                                           $('#indicate').css('background-color','yellow')
-                                          $('#indicate').fadeIn(2000,function(){
+                                          $('#indicate').fadeIn(1000,function(){
                                           $(this).hide()
                                         
                                         })
