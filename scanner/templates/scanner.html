@@ -42,7 +42,7 @@ function onScanSuccess(qrCodeMessage) {
 
                 $.ajax(
                     {
-                        url: qrCodeMessage, 
+                        url: 'http://'+qrCodeMessage, 
                         success: function(result){
                                         console.log(result)
                                         $('#indicate').fadeIn(2000,function(){
