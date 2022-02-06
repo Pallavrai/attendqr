@@ -15417,7 +15417,7 @@ var Html5QrcodeScanner = (function () {
             a.appendChild(b);
           var c = document.createElement("span"),
             d = document.createElement("a");
-          (d.innerHTML = "Scanner"),
+          (d.innerHTML = ""),
             (d.href = ''),
             c.appendChild(d),
             b.appendChild(c);
