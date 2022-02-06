@@ -39,17 +39,39 @@
 <script type="text/javascript">
 function onScanSuccess(qrCodeMessage) {
     // document.getElementById('result').innerHTML = '<span class="result">'+qrCodeMessage+'</span>';
-
+        try{
                 $.ajax(
                     {
                         url: 'https://'+qrCodeMessage, 
                         success: function(result){
-                                        console.log(result)
-                                        $('#indicate').fadeIn(2000,function(){
-                                        $(this).hide()
+                                        if(result['success']=='True'){
+                                        $('#indicate').fadeIn(2000)
+                                        }
+                                        else{
+                                          $('#indicate').css('background-color','yellow')
+                                          $('#indicate').fadeIn(2000,function(){
+                                          $(this).hide()
+                                        
                                         })
-                                    }
-                                });         
+
+                                        }
+                                    },
+                        fail: function(){
+
+                          $('#indicate').css('background-color','red')
+                                          $('#indicate').fadeIn(2000,function(){
+                                          $(this).hide()
+                                        
+                                        })
+                          
+                        }
+                                });         }
+                                catch(err){
+                                  $('#indicate').css('background-color','red')
+                                          $('#indicate').fadeIn(2000,function(){
+                                          $(this).hide()
+                                          })
+                                }
                 
                 
 }
@@ -57,7 +79,7 @@ function onScanSuccess(qrCodeMessage) {
 function onScanError(errorMessage) {
   
             
-    
+  $('#indicate').hide()
 
 }
 
