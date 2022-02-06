@@ -47,14 +47,14 @@ function onScanSuccess(qrCodeMessage) {
                                         if(result['success']=='True'){
                                         $('#indicate').fadeIn(1000)
                                         }
-                                        else{
-                                          $('#indicate').css('background-color','yellow')
-                                          $('#indicate').fadeIn(1000,function(){
-                                          $(this).hide()
+                                        // else{
+                                        //   $('#indicate').css('background-color','yellow')
+                                        //   $('#indicate').fadeIn(1000,function(){
+                                        //   $(this).hide()
                                         
-                                        })
+                                        // })
 
-                                        }
+                                        // }
                                     },
                         fail: function(){
 
