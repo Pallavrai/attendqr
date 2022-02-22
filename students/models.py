@@ -14,9 +14,9 @@ class studentsList(models.Model):
         ('C','commerce'),
         ('H','humanity')]
 
-    name=models.CharField(null=False,max_length=20)
+    name=models.CharField(null=False,max_length=255)
     email=models.EmailField(null=True)
-    parent_name=models.CharField(max_length=20)
+    parent_name=models.CharField(max_length=255)
     standard=models.IntegerField()
     phone=models.BigIntegerField(null=True)
     section=models.CharField(max_length=6,choices=section_names)
@@ -32,7 +32,7 @@ class studentsList(models.Model):
 
 
 class attendon(models.Model):
-    udate=models.TextField(primary_key=True)
+    udate=models.TextField(max_length=255,primary_key=True)
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
     date=models.DateField(default=timezone.now)
     attended=models.BooleanField(default=False)
