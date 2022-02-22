@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'attendsr.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'pallav',
-       'USER': 'postgres',
-       'PASSWORD': 'pallavrai12',
-       'HOST': 'localhost',
+       'NAME': 'deot4gdcu1s4l0',
+       'USER': 'cfxtwwxomsowsa',
+       'PASSWORD': '7813930e8cab3bd99eb0637eafdcb647b86bf442045bf17cbe32d64fb875c7b3',
+       'HOST': 'ec2-34-228-100-83.compute-1.amazonaws.com',
        'PORT': '5432',
    }
 }
