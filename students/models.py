@@ -1,3 +1,4 @@
+from email.policy import default
 from statistics import mode
 from django.db import models
 from django.shortcuts import HttpResponse
@@ -44,20 +45,65 @@ class attendon(models.Model):
 class json_data(models.Model):
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
     data=models.TextField(default={
-                                    "January":[31,0],
-                                    "February":[28,0],
-                                    "March":[31,0],
-                                    "April":[30,0],
-                                    "May" :[31,0],
-                                    "June" :[30,0],
-                                    "July":[31,0],
-                                    "August":[31,0],
-                                    "September":[30,0],
-                                    "October":[31,0],
-                                    "November":[30,0],
-                                    "December":[31,0]
+                                    "January":0,
+                                    "February":0,
+                                    "March":0,
+                                    "April":0,
+                                    "May" :0,
+                                    "June" :0,
+                                    "July":0,
+                                    "August":0,
+                                    "September":0,
+                                    "October":0,
+                                    "November":0,
+                                    "December":0
                                     })
    
 
     def __str__(self):
         return str(self.student)
+t=datetime.datetime.now()
+# def get_data(year):
+#     try:
+#         data=year_range.objects.get(year=year)
+#     except:
+#         data=year_range.object.create(year=year,range_data={
+#                                     "January":31,
+#                                     "February":28,
+#                                     "March":31,
+#                                     "April":30,
+#                                     "May" :31,
+#                                     "June" :30,
+#                                     "July":31,
+#                                     "August":31,
+#                                     "September":30,
+#                                     "October":31,
+#                                     "November":30,
+#                                     "December":31
+#     })
+#         data.save()
+    
+#     finally:
+#         return year_range.objects.get(year=year).range_data
+
+
+
+class year_range(models.Model):
+    year=models.IntegerField(default=t.year,primary_key=True)
+    range_data=models.TextField(default={
+                                    "January":31,
+                                    "February":28,
+                                    "March":31,
+                                    "April":30,
+                                    "May" :31,
+                                    "June" :30,
+                                    "July":31,
+                                    "August":31,
+                                    "September":30,
+                                    "October":31,
+                                    "November":30,
+                                    "December":31
+    })
+
+    def __str__(self):
+        return str(self.year)

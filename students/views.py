@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from students.models import studentsList,attendon,json_data
+from students.models import studentsList,attendon,json_data, year_range
 from django.utils import timezone
 import datetime as dt
 
@@ -30,10 +30,13 @@ def student_report(request,student):
     except attendon.DoesNotExist:
         obj_attendon="Absent"
     jd=json_data.objects.get(student=student)
+    t=dt.datetime.now()
+    month_range=year_range.objects.get(year=t.year)
     context={
         'attendon':obj_attendon,
         'student':student,
-        'jsondata':jd
+        'jsondata':jd,
+        'month_range':month_range
     }
     return render(request,'student_report.html',context)
 

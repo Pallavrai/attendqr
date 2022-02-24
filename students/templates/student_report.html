@@ -101,9 +101,12 @@
       
       var ctx = document.getElementById('myChart').getContext('2d');
       var data={{jsondata.data|safe}}
+      var range={{month_range.range_data|safe}}
+      range=Object.values(range)
+      month=Object.values(data)
       var vals=[]
-      for(ele of Object.values(data)) {
-        vals.push(ele[1]/ele[0]*100)
+      for(let i=0;i<12;i++) {
+        vals.push(month[i]/range[i]*100)
       }
       console.log(vals)
       var myChart = new Chart(ctx, {

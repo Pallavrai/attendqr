@@ -17,6 +17,6 @@ admin.site.site_title='Attendqr'
 admin.site.index_title='Dashboard'
 admin.site.site_header="Attendqr Admin"
 admin.site.register(studentsList,StudentAdmin)
-admin.site.register(json_data,json_dataAdmin)
+admin.site.register([json_data,year_range],json_dataAdmin)
 admin.site.register(attendon,AttendonAdmin)
 # Register your models here.
