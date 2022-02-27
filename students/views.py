@@ -34,10 +34,9 @@ def student_report(request,student):
     try:
         month_range=year_range.objects.get(year=t.year)
     except:
-         month_range=year_range.object.create(year=t.year)
+         month_range=year_range(year=t.year)
          month_range.save()
-    finally:
-        month_range=year_range.objects.get(year=t.year)
+    
     context={
         'attendon':obj_attendon,
         'student':student,
