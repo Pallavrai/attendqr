@@ -33,7 +33,6 @@ class studentsList(models.Model):
 
 
 class attendon(models.Model):
-    udate=models.TextField(max_length=255,primary_key=True)
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
     date=models.DateField(default=timezone.now)
     attended=models.BooleanField(default=False)
