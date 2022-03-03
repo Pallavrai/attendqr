@@ -79,23 +79,23 @@ WSGI_APPLICATION = 'attendsr.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': str(BASE_DIR / 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'deot4gdcu1s4l0',
-       'USER': 'cfxtwwxomsowsa',
-       'PASSWORD': '7813930e8cab3bd99eb0637eafdcb647b86bf442045bf17cbe32d64fb875c7b3',
-       'HOST': 'ec2-34-228-100-83.compute-1.amazonaws.com',
-       'PORT': '5432',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
+    }
 }
+
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'deot4gdcu1s4l0',
+#        'USER': 'cfxtwwxomsowsa',
+#        'PASSWORD': '7813930e8cab3bd99eb0637eafdcb647b86bf442045bf17cbe32d64fb875c7b3',
+#        'HOST': 'ec2-34-228-100-83.compute-1.amazonaws.com',
+#        'PORT': '5432',
+#    }
+# }
 
 
 

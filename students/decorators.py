@@ -19,7 +19,7 @@ def addmonth(function):
         key=mydate.strftime("%B") # 'December'
         s=student.data
         data=eval(s)
-        data[key][1]+=1
+        data[key]+=1
         student.data=data
         student.save()
         return function(request,id)
