@@ -25,8 +25,8 @@ def generate(request,id):
 def markattendance(request,id):
     try:
         stu=studentsList.objects.get(id=id)
-        
-        atten=attendon.objects.create(student=stu,attended=True)
+        uid=str(f'{id}-{datetime.datetime.now().strftime("%y%m%d")}')
+        atten=attendon.objects.create(udate=uid,student=stu,attended=True)
         atten.save()
     except:
         return JsonResponse({'success':'False'})

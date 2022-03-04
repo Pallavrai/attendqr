@@ -33,9 +33,14 @@ class studentsList(models.Model):
 
 
 class attendon(models.Model):
+    udate=models.TextField(max_length=255)
     student=models.ForeignKey(studentsList,on_delete=models.CASCADE)
     date=models.DateField(default=timezone.now)
     attended=models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ['udate']
+
 
 
     def __str__(self):
