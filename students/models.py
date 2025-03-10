@@ -1,13 +1,6 @@
-from email.policy import default
-from statistics import mode
 from django.db import models
-from django.shortcuts import HttpResponse
-from django.db.models.deletion import CASCADE
-from django.db.models.fields.related import ForeignKey
-from django.db.models.query_utils import select_related_descend
 import datetime
 from django.utils import timezone
-from django.http.response import HttpResponse
 
 class studentsList(models.Model):
     section_names=[
